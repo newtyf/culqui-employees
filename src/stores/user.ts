@@ -1,7 +1,10 @@
 import { defineStore } from "pinia";
-import axios, { AxiosError } from "axios";
 import router from "../router/router";
 import { User } from "../interfaces/User";
+import { deleteCookie, getCookiee, setCookie } from "../helpers/Cookies";
+import { useRequest } from "../hooks/request";
+import { isTokenExpired } from "../helpers/Token";
+import { useClerkStore } from "./employes";
 
 export const useUserStore = defineStore("userStore", {
   state: () => ({
@@ -9,12 +12,10 @@ export const useUserStore = defineStore("userStore", {
     loadingUser: false,
     loadingSession: false,
   }),
-  getters: {
-  },
+  getters: {},
   actions: {
     async setUser(user: User) {
       try {
-
         this.userData = {
           id: user.id,
           correo: user.correo,
@@ -22,8 +23,10 @@ export const useUserStore = defineStore("userStore", {
           departamento: user.departamento,
           estadoCuenta: user.estadoCuenta,
           nombre: user.nombre,
-          oficina: user.oficina
+          oficina: user.oficina,
         };
+
+        localStorage.setItem("user", JSON.stringify(this.userData));
       } catch (error) {
         console.log(error);
       }
@@ -32,25 +35,16 @@ export const useUserStore = defineStore("userStore", {
       try {
         this.loadingUser = true;
 
-        let headersList = {
-          "Content-Type": "application/json",
-        };
-
-        let bodyContent = JSON.stringify({
+        let body = {
           correo: email,
           password: password,
-        });
-
-        let reqOptions = {
-          url: "https://fepruebatecnicaculqi-backend-production.up.railway.app/auth/login",
-          method: "POST",
-          headers: headersList,
-          data: bodyContent,
         };
 
-        let response = await axios.request(reqOptions);
+        let response = await useRequest("/auth/login", body, "POST");
+        const user = response.data.user;
 
-        const user = response.data
+        const token = response.data.token;
+        setCookie("jwtToken", token, 1);
 
         await this.setUser(user);
 
@@ -61,22 +55,45 @@ export const useUserStore = defineStore("userStore", {
         this.loadingUser = false;
       }
     },
-    // async logOutUser() {
-    //   const store = useDatabaseStore();
-    //   store.$reset();
-    //   try {
-    //     this.loadingUser = true;
-    //     router.push("/login");
-    //     await signOut(auth);
-    //     this.userData = null;
-    //   } catch (error) {
-    //     console.log(error);
-    //   } finally {
-    //     this.loadingUser = false;
-    //   }
-    // },
+    async logOutUser() {
+      const store = useClerkStore();
+      store.$reset();
+      try {
+        this.loadingUser = true;
+        localStorage.removeItem("user")
+        deleteCookie("jwtToken")
+        router.push("/login");
+        this.userData = null;
+      } catch (error) {
+        console.log(error);
+      } finally {
+        this.loadingUser = false;
+      }
+    },
     currentUser() {
-      
+      const item = localStorage.getItem("user");
+      const token = getCookiee("jwtToken");
+
+      console.log(token)
+
+      if (item) {
+        if (token === "") {
+          this.logOutUser()
+          return null;
+        }
+
+        if (isTokenExpired(token)) {
+          this.logOutUser()
+          return null;
+        }
+
+        let user: User = JSON.parse(item);
+        this.setUser(user)
+      } else {
+        this.userData = null;
+      }
+
+      return this.userData;
     },
   },
 });
