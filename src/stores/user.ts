@@ -74,8 +74,6 @@ export const useUserStore = defineStore("userStore", {
       const item = localStorage.getItem("user");
       const token = getCookiee("jwtToken");
 
-      console.log(token)
-
       if (item) {
         if (token === "") {
           this.logOutUser()

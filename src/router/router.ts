@@ -6,7 +6,6 @@ import {
   createWebHistory,
 } from "vue-router";
 import Login from "../views/Login.vue";
-import Dashboard from "../views/Dashboard.vue";
 import { useUserStore } from "../stores/user";
 import Employees from "../views/Employees.vue";
 import NotFound from "../views/NotFound.vue";
@@ -30,16 +29,10 @@ const requireAuth = async (
 
 const routes: RouteRecordRaw[] = [
   {
-    path: "/",
-    component: Dashboard,
+    path: "/empleados",
+    component: Employees,
     beforeEnter: requireAuth,
-    name: "dashboard",
-    children: [
-      {
-        path: "/empleados",
-        component: Employees,
-      },
-    ],
+    name: "employees",
   },
   { path: "/login", component: Login, name: "login" },
   {
