@@ -1,58 +1,59 @@
 <template>
-  <section class="w-full bg-white rounded-xl p-6">
-    <header class="flex justify-between">
-      <div>
+  <section class="w-full h-full flex flex-col bg-white rounded-xl p-6">
+    <header class="flex justify-between h-14">
+      <div class="h-full flex flex-col justify-center">
         <h1 class="text-2xl font-semibold">Empleados</h1>
-        <p class="text-sm text-gray-500">Gestiona tus empleados</p>
+        <p class="text-sm text-gray-500 mt-1">Gestiona tus empleados</p>
       </div>
       <div>
-        <CustomBtn class="mx-1">Descargar</CustomBtn>
-        <CustomBtn class="mx-1">Nuevo</CustomBtn>
+        <CustomBtn class="mx-1 inline-block h-full">Descargar</CustomBtn>
+        <CustomBtn class="mx-1 inline-block h-full">Nuevo</CustomBtn>
       </div>
     </header>
-    <nav v-if="!ClerkStore.loadingClerks" class="my-6 flex justify-between">
-      <input type="text" class="h-10 border-2 rounded-lg w-8/12 p-4" placeholder="Buscar empleado">
-      <select name="cargo" id="" class="ml-4 w-4/12 px-2 border-2 rounded-lg h-10">
+    <nav v-if="!ClerkStore.loadingClerks" class="my-6 flex justify-between h-14">
+      <input type="text" class="h-full border-2 border-slate-100 rounded-lg w-8/12 p-4" placeholder="Buscar empleado">
+      <select name="cargo" id="" class="h-full ml-4 w-4/12 px-2 border-2 rounded-lg">
         <option value="">Nombre de cargo</option>
         <option value="">Departamento</option>
         <option value="">Oficio</option>
       </select>
     </nav>
-    <article v-if="!ClerkStore.loadingClerks">
-      <table class="w-full">
-        <thead align="left" class="bg-gray-100 h-16">
-          <th class="text-gray-400 pl-5 text-sm">Nombre</th>
-          <th class="text-gray-400 pl-5 text-sm">Nombre cargo</th>
-          <th class="text-gray-400 pl-5 text-sm">Departamento</th>
-          <th class="text-gray-400 pl-5 text-sm">Oficina</th>
-          <th class="text-gray-400 pl-5 text-sm">Cuenta</th>
-          <th class="text-gray-400 pl-5 text-sm">Acciones</th>
-        </thead>
-        <tbody>
-          <tr class="border-b-2 h-14" v-for="item in ClerkStore.employees">
-            <td class="pl-5 text-sm">{{ item.nombre }} <p class="text-gray-400 text-sm">{{ item.correo }}</p>
-            </td>
-            <td class="pl-5 text-sm">{{ item.cargo }}</td>
-            <td class="pl-5 text-sm">{{ item.departamento }}</td>
-            <td class="pl-5 text-sm">{{ item.oficina }}</td>
-            <td class="pl-5 text-sm">{{ item.estadoCuenta }}</td>
-            <td class="mt-4 flex justify-center items-center">
-              <button class="w-7 h-7 rounded-lg bg-green-500 text-white mr-1 flex items-center justify-center">
-                <Eye />
-              </button>
-              <button class="w-7 h-7 rounded-lg bg-blue-500 text-white mr-1 flex items-center justify-center">
-                <Eye />
-              </button>
-              <button class="w-7 h-7 rounded-lg bg-red-500 text-white mr-1 flex items-center justify-center">
-                <Eye />
-              </button>
-            </td>
-          </tr>
-        </tbody>
+    <article v-if="!ClerkStore.loadingClerks" class="max-h-[calc(100%-14rem)]">
+      <div class="grid grid-cols-6 h-16 items-center bg-gray-50 border-b-2 border-slate-100 ">
+        <p class="font-bold text-gray-400 pl-5 text-sm">Nombre</p>
+        <p class="font-bold text-gray-400 pl-5 text-sm">Nombre cargo</p>
+        <p class="font-bold text-gray-400 pl-5 text-sm">Departamento</p>
+        <p class="font-bold text-gray-400 pl-5 text-sm">Oficina</p>
+        <p class="font-bold text-gray-400 pl-5 text-sm">Cuenta</p>
+        <p class="font-bold text-gray-400 pl-5 text-sm pr-6 flex justify-end">Acciones</p>
+      </div>
 
-      </table>
+      <div class="overflow-y-scroll max-h-[calc(100%-5rem)]">
+        <div class="grid grid-cols-6 h-16 border-b-2 items-center border-slate-100"
+          v-for="item in ClerkStore.employees">
+          <p class="pl-5 text-sm">{{ item.nombre }}
+          <p class="text-gray-400 text-sm">{{ item.correo }}</p>
+          </p>
+          <p class="pl-5 text-sm">{{ item.cargo }}</p>
+          <p class="pl-5 text-sm">{{ item.departamento }}</p>
+          <p class="pl-5 text-sm">{{ item.oficina }}</p>
+          <p class="pl-5 text-sm">{{ item.estadoCuenta }}</p>
+          <div class="pr-6 flex justify-end">
+            <button class="w-8 h-8 rounded-lg bg-green-600 text-white mr-1 flex items-center justify-center">
+              <Eye class="w-4 h-4" />
+            </button>
+            <button class="w-8 h-8 rounded-lg bg-blue-600 text-white mr-1 flex items-center justify-center">
+              <TrashCan class="w-4 h-4" />
+            </button>
+            <button class="w-8 h-8 rounded-lg bg-red-500 text-white mr-1 flex items-center justify-center">
+              <Pen class="w-4 h-4" />
+            </button>
+          </div>
+        </div>
+      </div>
+
     </article>
-    <footer class="flex justify-between items-center px-3 mt-4">
+    <footer class="flex justify-between items-center mt-auto px-3">
       <!-- Paginación dinámica con puntos suspensivos -->
       <ul class="flex list-none">
         <li @click="prevPage" :class="{ 'cursor-not-allowed': currentPage === 1 }"
@@ -70,9 +71,9 @@
         <li class="mx-1 px-3 py-2 rounded cursor-pointer">
           ...
         </li>
-        <li @click="changePage(10)" :class="{ 'font-bold': currentPage === 10 }"
+        <li  @click="changePage(pageCount)" :class="{ 'font-bold': currentPage === 10 }"
           class="mx-1 px-3 py-2 rounded cursor-pointer">
-          10
+          {{ pageCount }}
         </li>
 
         <li @click="nextPage" :class="{ 'cursor-not-allowed': currentPage === pageCount }"
@@ -81,7 +82,7 @@
         </li>
       </ul>
 
-      <p class="text-sm">Mostrando 1 a 8 de 50 registros</p>
+      <p class="text-sm">Mostrando 1 a 8 de {{ ClerkStore.totalEmployees }} registros</p>
     </footer>
   </section>
 </template>
@@ -89,22 +90,24 @@
 <script setup lang="ts">
 import CustomBtn from "../components/common/CustomBtn.vue"
 import Eye from "../components/icons/Eye.vue"
+import TrashCan from "../components/icons/TrashCan.vue"
+import Pen from "../components/icons/Pen.vue"
 
 import { useClerkStore } from '../stores/employes';
 import { computed, ref } from 'vue';
 
 const ClerkStore = useClerkStore();
 
-const pageSize = ref(5);
+const pageSize = ref(8);
 const currentPage = ref(1);
 
-ClerkStore.getEmployees(8, 1);
+ClerkStore.getEmployees(pageSize.value, 1);
 const pageCount = computed(() => Math.ceil(ClerkStore.totalEmployees / pageSize.value));
 
 const changePage = (pageNumber: number) => {
   if (pageNumber >= 1 && pageNumber <= pageCount.value) {
     currentPage.value = pageNumber;
-    ClerkStore.getEmployees(8, pageNumber);
+    ClerkStore.getEmployees(pageSize.value, pageNumber);
   }
 };
 
@@ -118,12 +121,7 @@ const nextPage = () => {
 
 const showPageNumber = (pageNumber: number) => {
   // Muestra solo 1, 2, 3 y pageCount
-  return pageNumber === 1 || pageNumber === 2 || pageNumber === 3;
-};
-
-const showEllipsis = (pageNumber: number) => {
-  // Muestra puntos suspensivos después del 3 y antes del pageCount
-  return pageNumber > 3 && pageNumber < pageCount.value;
+  return pageNumber === 1 || pageNumber === 2 || pageNumber === 3 || pageNumber === pageNumber;
 };
 
 </script>

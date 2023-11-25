@@ -1,9 +1,9 @@
 <template>
   <main class="bg-gray-100 flex">
     <Aside />
-    <section class="w-full">
+    <section class="w-full h-screen">
       <Header />
-      <article class="p-8">
+      <article class="p-8 h-[calc(100%-96px)] ">
         <router-view></router-view>
       </article>
     </section>
