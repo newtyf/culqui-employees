@@ -14,10 +14,6 @@ export const useClerkStore = defineStore("clerkStore", {
   actions: {
     async getEmployees(limit: number, pagination: number) {
       try {
-        if (this.employees.length !== 0) {
-          return;
-        }
-
         this.loadingClerks = true;
         const response = await useRequest(
           `/empleados?limit=${limit}&page=${pagination}`,
@@ -25,10 +21,7 @@ export const useClerkStore = defineStore("clerkStore", {
           "GET"
         );
         const clerks: Employee[] = response.data;
-        clerks.forEach((clerk) => {
-          this.employees.push(clerk);
-        });
-
+        this.employees = clerks
         this.totalEmployees = response.total;
       } catch (error) {
         console.log(error);

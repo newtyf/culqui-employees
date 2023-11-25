@@ -9,6 +9,7 @@ import Login from "../views/Login.vue";
 import { useUserStore } from "../stores/user";
 import Employees from "../views/Employees.vue";
 import NotFound from "../views/NotFound.vue";
+import Dashboard from "../views/Dashboard.vue";
 
 const requireAuth = async (
   to: RouteLocationNormalized,
@@ -29,10 +30,16 @@ const requireAuth = async (
 
 const routes: RouteRecordRaw[] = [
   {
-    path: "/empleados",
-    component: Employees,
+    path: "/",
+    component: Dashboard,
     beforeEnter: requireAuth,
-    name: "employees",
+    name: "dashboard",
+    children: [
+      {
+        path: "/empleados",
+        component: Employees,
+      },
+    ],
   },
   { path: "/login", component: Login, name: "login" },
   {

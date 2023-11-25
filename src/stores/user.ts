@@ -58,17 +58,12 @@ export const useUserStore = defineStore("userStore", {
     async logOutUser() {
       const store = useClerkStore();
       store.$reset();
-      try {
-        this.loadingUser = true;
-        localStorage.removeItem("user")
-        deleteCookie("jwtToken")
-        router.push("/login");
-        this.userData = null;
-      } catch (error) {
-        console.log(error);
-      } finally {
-        this.loadingUser = false;
-      }
+      this.loadingUser = true;
+      router.push("/login");
+      localStorage.removeItem("user");
+      deleteCookie("jwtToken");
+      this.userData = null;
+      this.loadingUser = false;
     },
     currentUser() {
       const item = localStorage.getItem("user");
@@ -76,17 +71,17 @@ export const useUserStore = defineStore("userStore", {
 
       if (item) {
         if (token === "") {
-          this.logOutUser()
+          this.logOutUser();
           return null;
         }
 
         if (isTokenExpired(token)) {
-          this.logOutUser()
+          this.logOutUser();
           return null;
         }
 
         let user: User = JSON.parse(item);
-        this.setUser(user)
+        this.setUser(user);
       } else {
         this.userData = null;
       }
