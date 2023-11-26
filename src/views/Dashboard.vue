@@ -3,7 +3,7 @@
     <Aside />
     <section class="w-full h-screen">
       <Header />
-      <article class="p-8 h-[calc(100%-96px)] ">
+      <article class="flex p-8 max-h-[calc(100%-96px)]">
         <router-view></router-view>
       </article>
     </section>

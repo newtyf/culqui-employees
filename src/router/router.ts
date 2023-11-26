@@ -10,6 +10,7 @@ import { useUserStore } from "../stores/user";
 import Employees from "../views/Employees.vue";
 import NotFound from "../views/NotFound.vue";
 import Dashboard from "../views/Dashboard.vue";
+import Recruitment from "../views/Recruitment.vue";
 
 const requireAuth = async (
   to: RouteLocationNormalized,
@@ -38,6 +39,12 @@ const routes: RouteRecordRaw[] = [
       {
         path: "/empleados",
         component: Employees,
+        name: "empleados"
+      },
+      {
+        path: "/reclutamiento",
+        component: Recruitment,
+        name: "reclutamiento"
       },
     ],
   },

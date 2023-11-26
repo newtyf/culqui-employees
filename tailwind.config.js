@@ -4,7 +4,14 @@ export default {
   darkMode: "media",
   content: [],
   theme: {
-    extend: {},
+    extend: {
+      maxWidth: {
+        '72': '288px',
+      },
+      rotate: {
+        '1.2': ".5deg"
+      }
+    },
   },
   plugins: [],
 }
