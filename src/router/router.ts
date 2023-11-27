@@ -60,7 +60,7 @@ const routes: RouteRecordRaw[] = [
 
 const router = createRouter({
   routes,
-  history: createWebHistory(),
+  history: createWebHistory("/culqui-employees/"),
 });
 
 export default router;
