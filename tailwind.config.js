@@ -10,6 +10,9 @@ export default {
       },
       rotate: {
         '1.2': ".5deg"
+      },
+      gridTemplateColumns: {
+        '6-120': "repeat(6, minmax(120px, 1fr))"
       }
     },
   },

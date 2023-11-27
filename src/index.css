@@ -3,9 +3,9 @@
 @tailwind utilities;
 
 .btn-primary {
-  @apply border-slate-900 border-2 rounded-lg p-5 flex items-center justify-center hover:bg-slate-900 hover:text-white duration-200 md:px-6 md:py-5;
+  @apply border-slate-900 border-2 rounded-lg p-1 flex items-center justify-center hover:bg-slate-900 hover:text-white duration-200 md:px-6 sm:p-5;
 }
 
 .btn-secondary {
-  @apply border-slate-900 border-2 bg-slate-950 text-white rounded-lg p-5 flex items-center justify-center hover:bg-white hover:text-black duration-200 md:px-6 md:py-5;
+  @apply border-slate-900 border-2 bg-slate-950 text-white rounded-lg p-1 flex items-center justify-center hover:bg-white hover:text-black duration-200 md:px-6 sm:p-5;
 }

@@ -1,12 +1,12 @@
 <template>
   <section v-show="!ClerkStore.loadingClerks" class="w-full max-h-full flex flex-col bg-white rounded-xl p-6 ">
-    <header class="flex justify-between md:h-14">
+    <header class="flex flex-col justify-between md:h-14 sm:flex-row">
       <div class="h-full flex flex-col justify-center">
         <h1 class="text-2xl font-semibold">Empleados</h1>
         <p class="text-sm text-gray-500 mt-1">Gestiona tus empleados</p>
       </div>
-      <div class="h-full flex">
-        <button class="group/item btn-primary mx-1 w-auto md:w-40 h-full">
+      <div class="h-full flex flex-col sm:flex-row">
+        <button class="group/item btn-primary mx-1 my-4 sm:my-0 sm:w-40 h-full">
           <font-awesome-icon icon="fa-solid fa-file-arrow-down"
             class="group/icon inline-block w-5 group-hover/item:text-white mr-2" />
           Descargar
@@ -17,15 +17,15 @@
         </button>
       </div>
     </header>
-    <nav class="my-6 flex justify-between md:h-14">
-      <div class="h-full w-8/12 relative">
+    <nav class="my-6 flex flex-col md:flex-row justify-between md:h-14">
+      <div class="md:h-full w-full md:w-8/12 relative">
         <input type="text" class="h-full border-2 border-slate-100 rounded-lg w-full p-4 outline-green-500"
           placeholder="Buscar empleado">
         <div class="absolute right-5 top-5 pointer-events-none">
           <img src="../assets/icons/Lens.svg" />
         </div>
       </div>
-      <div class="h-full ml-4 w-4/12 relative">
+      <div class="h-14 mt-2 w-full md:w-4/12 relative md:h-full md:ml-4 md:mt-0">
         <select name="cargo" id="" class="appearance-none h-full w-full px-4 border-slate-100 border-2 rounded-lg">
           <option value="">Nombre de cargo</option>
           <option value="">Departamento</option>
@@ -37,7 +37,7 @@
       </div>
     </nav>
     <article class="flex flex-1 flex-col mb-4 overflow-hidden">
-      <div class="grid grid-cols-6 h-16 items-center bg-gray-50 border-b-2 border-slate-100 ">
+      <div id="header" class="grid grid-cols-6-120 h-16 items-center bg-gray-50 border-b-2 border-slate-100 md:grid-cols-6">
         <p class="font-bold text-gray-400 pl-5 text-sm">Nombre</p>
         <p class="font-bold text-gray-400 pl-5 text-sm">Nombre cargo</p>
         <p class="font-bold text-gray-400 pl-5 text-sm">Departamento</p>
@@ -47,7 +47,7 @@
       </div>
 
       <div class="overflow-y-auto flex-1">
-        <div class="grid grid-cols-6 h-16 border-b-2 items-center border-slate-100" v-for="item in ClerkStore.employees">
+        <div class="grid grid-cols-6-120 h-16 border-b-2 items-center border-slate-100 md:grid-cols-6" v-for="item in ClerkStore.employees">
           <div class="pl-5 text-sm">
             <p>{{ item.nombre }}</p>
             <p class="text-gray-400 text-sm truncate">{{ item.correo }}</p>
@@ -71,10 +71,10 @@
       </div>
 
     </article>
-    <footer class="flex justify-between items-center mt-auto px-3">
+    <footer class="flex justify-between flex-col items-center mt-auto px-3 md:flex-row">
       <Pagination :total="ClerkStore.totalEmployees" :get-items="ClerkStore.getEmployees"
         :page-size="ClerkStore.pageSize" />
-      <div class="h-full flex items-center">
+      <div class="h-full flex items-center mt-4 md:mt-0">
         <p class="text-sm text-gray-500">Mostrando 1 a {{ ClerkStore.pageSize }} de {{ ClerkStore.totalEmployees }}
           registros</p>
         <div class="h-full ml-4 relative">
@@ -115,11 +115,12 @@ const page = () => {
 
 <style scoped>
 ::-webkit-scrollbar {
+  height: 5px;
   width: 5px;
 }
 
 /* Track */
-::-webkit-scrollbar-track {
+::-webkit-scrollbar-track{
   background: #d4d1d1;
   border-radius: 5px;
 }
@@ -133,4 +134,5 @@ const page = () => {
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
-}</style>
+}
+</style>
