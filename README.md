@@ -1,18 +1,52 @@
-# Vue 3 + TypeScript + Vite
+<h1 align="center">Culqui Employees</h1>
+<h6 align="center">Technical Test for Joyit with Culqui</h6>
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+<div align="center"><img src="https://github.com/newtyf/culqui-employees/assets/87625663/32f2d7e6-ece5-4044-bb07-045b4b7b60b0" alt="game-image" width="500" /></div>
 
-## Recommended IDE Setup
+<p align="center">Live Site <a style="color: #70aaa2" href="https://newtyf.github.io/culqui-employees">Here</a>.</p>
 
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+1. Bootstrapped with [Vue](https://vuejs.org/).
 
-## Type Support For `.vue` Imports in TS
+## 👾 Set Up
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
+1. Install the dependencies
 
-If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
+  ```sh
+  npm install
+  ```
 
-1. Disable the built-in TypeScript Extension
-   1. Run `Extensions: Show Built-in Extensions` from VSCode's command palette
-   2. Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
-2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
+2. Start development server
+
+  ```sh
+  npm run dev
+  ```
+
+## 👾 Build and Run for production
+1. Generate a full static production build
+
+  ```sh
+  npm run build
+  ```
+
+2. You can run with:
+
+  ```sh
+  npx http-server ./dist
+  ```
+
+
+### 🛠 Built with
+
+- VueJs 3
+- Typescript
+- Semantic HTML5 markup
+- Tailwind CSS
+- [Vue](https://vuejs.org/) - The Progressive JavaScript Framework
+- [Font Awesome Icons](https://fontawesome.com/icons) - Icon library
+
+### 💻 Author
+
+- Portfolio - [@newtyf](https://newtyf.com)
+- Instagram - [@newtyf](https://www.instagram.com/newt_yf/)
+- LinkedIn - [@newtyf](https://www.linkedin.com/in/axel-mu%C3%B1oz/)
+- Frontend Mentor - [@newtyf](https://www.frontendmentor.io/profile/TREz-bits)
