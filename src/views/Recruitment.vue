@@ -3,7 +3,7 @@
     <header class="flex justify-between md:h-14">
       <div class="h-full flex flex-col justify-center">
         <h1 class="text-2xl font-semibold">Reclutamiento</h1>
-        <p class="text-sm text-gray-500 mt-1">Gestiona tus empleados</p>
+        <p class="text-sm text-gray-500 mt-1">Gestiona tus reclutamientos</p>
       </div>
     </header>
     <nav class="my-6 flex justify-between md:h-14">
