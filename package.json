@@ -3,6 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "homepage": "https://newtyf.github.io/culqui-employees/",
   "scripts": {
     "dev": "vite --host",
     "build": "vue-tsc && vite build",
