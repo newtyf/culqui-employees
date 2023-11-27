@@ -13,8 +13,8 @@ import Dashboard from "../views/Dashboard.vue";
 import Recruitment from "../views/Recruitment.vue";
 
 const requireAuth = async (
-  to: RouteLocationNormalized,
-  from: RouteLocationNormalized,
+  _to: RouteLocationNormalized,
+  _from: RouteLocationNormalized,
   next: NavigationGuardNext
 ) => {
   const userStore = useUserStore();
